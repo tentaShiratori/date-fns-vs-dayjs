@@ -1,4 +1,6 @@
 import { format } from "date-fns/format";
 
-const now = new Date();
-console.log(format(now, "yyyy年MM月dd日HH時mm分ss秒"));
+export default function dateFnsFormat(): string {
+	const now = new Date();
+	return format(now, "yyyy年MM月dd日HH時mm分ss秒");
+}

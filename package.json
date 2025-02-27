@@ -2,8 +2,10 @@
 	"name": "date-fns-vs-dayjs",
 	"module": "index.ts",
 	"scripts": {
+		"fmt": "biome check --write",
 		"webpack": "tsc && webpack build --mode=production",
-		"esbuild": "tsc && bun run esbuild.ts"
+		"esbuild": "tsc && bun run esbuild.ts",
+		"runner:gen": "bun run ./scripts/generate-runner.ts"
 	},
 	"devDependencies": {
 		"@types/bun": "latest"
@@ -16,6 +18,8 @@
 		"date-fns": "^4.1.0",
 		"dayjs": "^1.11.13",
 		"esbuild": "^0.25.0",
+		"jiti": "^2.4.2",
+		"mitata": "^1.0.34",
 		"webpack": "^5.98.0",
 		"webpack-bundle-analyzer": "^4.10.2",
 		"webpack-cli": "^6.0.1"

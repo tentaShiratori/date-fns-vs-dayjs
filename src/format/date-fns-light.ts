@@ -1,3 +1,6 @@
 import { lightFormat } from "date-fns/lightFormat";
-const now = new Date();
-console.log(lightFormat(now, "yyyy年MM月dd日HH時mm分ss秒"));
+
+export default function dateFnsLight(): string {
+	const now = new Date();
+	return lightFormat(now, "yyyy年MM月dd日HH時mm分ss秒");
+}

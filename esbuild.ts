@@ -1,44 +1,43 @@
+import fs from "node:fs/promises";
+import path from "node:path";
 import { analyzeMetafile, build } from "esbuild";
 
-const options = [
-	// format
-	{
-		entryPoints: ["./dist/format/dayjs.js"],
-		minify: true,
-		bundle: true,
-		outfile: "./build/format/dayjs/esbuild.js",
-		metafile: true,
-	},
-	{
-		entryPoints: ["./dist/format/date-fns-light.js"],
-		minify: true,
-		bundle: true,
-		outfile: "./build/format/date-fns-light/esbuild.js",
-		metafile: true,
-	},
-	{
-		entryPoints: ["./dist/format/date-fns-format.js"],
-		minify: true,
-		bundle: true,
-		outfile: "./build/format/date-fns-format/esbuild.js",
-		metafile: true,
-	},
-	{
-		entryPoints: ["./dist/format/date-fns-intl.js"],
-		minify: true,
-		bundle: true,
-		outfile: "./build/format/date-fns-intl/esbuild.js",
-		metafile: true,
-	},
-];
-
-Promise.all(options.map((option) => build(option))).then(async (results) => {
-	for (const result of results) {
-		if (result.metafile == null) {
-			console.log("metafile is null");
-			return;
+async function createOptions() {
+	const runnerDir = path.resolve(__dirname, "./runner");
+	const files = await fs.readdir(runnerDir, {
+		recursive: true,
+		withFileTypes: true,
+	});
+	return files
+		.filter((file) => file.isFile())
+		.map((file) => {
+			const parsed = path.parse(file.name);
+			const data = {
+				name: parsed.name,
+				dir: path
+					.relative(runnerDir, file.parentPath)
+					.replaceAll(path.sep, "/"),
+			};
+			return {
+				entryPoints: [
+					`./dist/runner/${data.dir && `${data.dir}/`}${data.name}.js`,
+				],
+				minify: true,
+				bundle: true,
+				outfile: `./build/${data.dir && `${data.dir}/`}${data.name}/esbuild.js`,
+				metafile: true,
+			};
+		});
+}
+await Promise.all((await createOptions()).map((option) => build(option))).then(
+	async (results) => {
+		for (const result of results) {
+			if (result.metafile == null) {
+				console.log("metafile is null");
+				return;
+			}
+			const meta = await analyzeMetafile(result.metafile);
+			console.log(meta);
 		}
-		const meta = await analyzeMetafile(result.metafile);
-		console.log(meta);
-	}
-});
+	},
+);
