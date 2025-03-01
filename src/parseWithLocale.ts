@@ -8,24 +8,26 @@ export default function () {
 	const now = new Date();
 	process.env.TZ = "UTC";
 	console.log(
-		"TZ:\tdate-fns: ",
+		"process.env.TZ:",
+		"date-fns:",
 		format(now, "X"),
-		", ",
-		"dayjs: ",
+		",",
+		"dayjs:",
 		dayjs(now).locale(),
 	);
-	console.log("date-fns: ", lightFormat(now, "yyyy年MM月dd日HH時mm分ss秒"));
-	console.log("dayjs: ", dayjs(now).format("YYYY年MM月DD日HH時mm分ss秒"));
+	console.log("date-fns:", lightFormat(now, "yyyy年MM月dd日HH時mm分ss秒"));
+	console.log("dayjs:", dayjs(now).format("YYYY年MM月DD日HH時mm分ss秒"));
 	process.env.TZ = "Asia/Tokyo";
 	console.log(
-		"TZ:\tdate-fns: ",
+		"process.env.TZ:",
+		"date-fns:",
 		format(now, "X"),
-		", ",
-		"dayjs: ",
+		",",
+		"dayjs:",
 		dayjs(now).locale(),
 	);
-	console.log("date-fns: ", lightFormat(now, "yyyy年MM月dd日HH時mm分ss秒"));
-	console.log("dayjs: ", dayjs(now).format("YYYY年MM月DD日HH時mm分ss秒"));
+	console.log("date-fns:", lightFormat(now, "yyyy年MM月dd日HH時mm分ss秒"));
+	console.log("dayjs:", dayjs(now).format("YYYY年MM月DD日HH時mm分ss秒"));
 	console.log("結果: process.env.TZによって表示が変わる");
 	console.log("---------------------------------------------");
 
@@ -33,30 +35,32 @@ export default function () {
 	const isoTZ = "2022-01-01T00:00:00.000Z";
 	process.env.TZ = "UTC";
 	console.log(
-		"TZ:\tdate-fns: ",
+		"process.env.TZ:",
+		"date-fns:",
 		format(parseISO(isoTZ), "X"),
-		", ",
-		"dayjs: ",
+		",",
+		"dayjs:",
 		dayjs(isoTZ).locale(),
 	);
 	console.log(
-		"date-fns: ",
+		"date-fns:",
 		lightFormat(parseISO(isoTZ), "yyyy年MM月dd日HH時mm分ss秒"),
 	);
-	console.log("dayjs: ", dayjs(isoTZ).format("YYYY年MM月DD日HH時mm分ss秒"));
+	console.log("dayjs:", dayjs(isoTZ).format("YYYY年MM月DD日HH時mm分ss秒"));
 	process.env.TZ = "Asia/Tokyo";
 	console.log(
-		"TZ:\tdate-fns: ",
+		"process.env.TZ:",
+		"date-fns:",
 		format(parseISO(isoTZ), "X"),
-		", ",
-		"dayjs: ",
+		",",
+		"dayjs:",
 		dayjs(isoTZ).locale(),
 	);
 	console.log(
-		"date-fns: ",
+		"date-fns:",
 		lightFormat(parseISO(isoTZ), "yyyy年MM月dd日HH時mm分ss秒"),
 	);
-	console.log("dayjs: ", dayjs(isoTZ).format("YYYY年MM月DD日HH時mm分ss秒"));
+	console.log("dayjs:", dayjs(isoTZ).format("YYYY年MM月DD日HH時mm分ss秒"));
 	console.log("結果: process.env.TZによって表示が変わる");
 	console.log("---------------------------------------------");
 
@@ -64,30 +68,32 @@ export default function () {
 	const isoTZ2 = "2022-01-01T00:00:00.000+09:00";
 	process.env.TZ = "UTC";
 	console.log(
-		"TZ:\tdate-fns: ",
+		"process.env.TZ:",
+		"date-fns:",
 		format(parseISO(isoTZ2), "X"),
-		", ",
-		"dayjs: ",
+		",",
+		"dayjs:",
 		dayjs(isoTZ2).locale(),
 	);
 	console.log(
-		"date-fns: ",
+		"date-fns:",
 		lightFormat(parseISO(isoTZ2), "yyyy年MM月dd日HH時mm分ss秒"),
 	);
-	console.log("dayjs: ", dayjs(isoTZ2).format("YYYY年MM月DD日HH時mm分ss秒"));
+	console.log("dayjs:", dayjs(isoTZ2).format("YYYY年MM月DD日HH時mm分ss秒"));
 	process.env.TZ = "Asia/Tokyo";
 	console.log(
-		"TZ:\tdate-fns: ",
+		"process.env.TZ:",
+		"date-fns:",
 		format(parseISO(isoTZ2), "X"),
-		", ",
-		"dayjs: ",
+		",",
+		"dayjs:",
 		dayjs(isoTZ2).locale(),
 	);
 	console.log(
-		"date-fns: ",
+		"date-fns:",
 		lightFormat(parseISO(isoTZ2), "yyyy年MM月dd日HH時mm分ss秒"),
 	);
-	console.log("dayjs: ", dayjs(isoTZ2).format("YYYY年MM月DD日HH時mm分ss秒"));
+	console.log("dayjs:", dayjs(isoTZ2).format("YYYY年MM月DD日HH時mm分ss秒"));
 	console.log("結果: process.env.TZによって表示が変わる");
 	console.log("---------------------------------------------");
 
@@ -95,82 +101,46 @@ export default function () {
 	const isoNoTZ = "2022-01-01T00:00:00.000";
 	process.env.TZ = "UTC";
 	console.log(
-		"TZ:\tdate-fns: ",
+		"process.env.TZ:",
+		"date-fns:",
 		format(parseISO(isoNoTZ), "X"),
-		", ",
-		"dayjs: ",
+		",",
+		"dayjs:",
 		dayjs(isoNoTZ).locale(),
 	);
 	console.log(
-		"date-fns(lightFormat): ",
+		"date-fns(lightFormat):",
 		lightFormat(parseISO(isoNoTZ), "yyyy年MM月dd日HH時mm分ss秒"),
 	);
 	console.log(
-		"date-fns(format): ",
+		"date-fns(format):",
 		format(parseISO(isoNoTZ), "yyyy年MM月dd日HH時mm分ss秒xxx"),
 	);
 	console.log(
-		"dayjs: ",
+		"dayjs:",
 		dayjs(isoNoTZ).locale("ja").format("YYYY年MM月DD日HH時mm分ss秒Z"),
 	);
 	process.env.TZ = "Asia/Tokyo";
 	console.log(
-		"TZ:\tdate-fns: ",
+		"process.env.TZ:",
+		"date-fns:",
 		format(parseISO(isoNoTZ), "X"),
-		", ",
-		"dayjs: ",
+		",",
+		"dayjs:",
 		dayjs(isoNoTZ).locale(),
 	);
 	console.log(
-		"date-fns(lightFormat): ",
+		"date-fns(lightFormat):",
 		lightFormat(parseISO(isoNoTZ), "yyyy年MM月dd日HH時mm分ss秒"),
 	);
 	console.log(
-		"date-fns(format): ",
+		"date-fns(format):",
 		format(parseISO(isoNoTZ), "yyyy年MM月dd日HH時mm分ss秒xxx"),
 	);
 	console.log(
-		"dayjs: ",
+		"dayjs:",
 		dayjs(isoNoTZ).locale("ja").format("YYYY年MM月DD日HH時mm分ss秒Z"),
 	);
 	console.log("結果: process.env.TZの値がlocaleとして使われる");
-	console.log("---------------------------------------------");
-
-	console.log("調査内容: あとからTZ変えられる？");
-	process.env.TZ = "UTC";
-	console.log(
-		"TZ:\tdate-fns: ",
-		format(parseISO(isoNoTZ), "X"),
-		", ",
-		"dayjs: ",
-		dayjs(isoNoTZ).locale(),
-	);
-	console.log(
-		"date-fns: ",
-		format(parseISO(isoNoTZ).toISOString(), "yyyy年MM月dd日HH時mm分ss秒xxx"),
-	);
-	console.log("dayjs:\tsetS global locale", dayjs.locale("ja"));
-	console.log(
-		"dayjs: ",
-		dayjs(isoNoTZ).locale("ja").format("YYYY年MM月DD日HH時mm分ss秒Z"),
-	);
-	process.env.TZ = "Asia/Tokyo";
-	console.log(
-		"TZ:\tdate-fns: ",
-		format(parseISO(isoNoTZ), "X"),
-		", ",
-		"dayjs: ",
-		dayjs(isoNoTZ).locale(),
-	);
-	console.log(
-		"date-fns: ",
-		format(parseISO(isoNoTZ), "yyyy年MM月dd日HH時mm分ss秒xxx"),
-	);
-	console.log("dayjs:\tsetS global locale", dayjs.locale("en"));
-	console.log(
-		"dayjs: ",
-		dayjs(isoNoTZ).locale("en").format("YYYY年MM月DD日HH時mm分ss秒Z"),
-	);
-	console.log("結果: dayjsもdate-fnsもTZはparse時のprocess.env.TZに固定される");
 	console.log("---------------------------------------------");
 }

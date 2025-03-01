@@ -5,7 +5,6 @@ import { scanSrc } from "./lib/scanSrc";
 async function main() {
 	const files = await scanSrc();
 	for (const file of files) {
-		console.log(file.dir);
 		const level = file.dir ? file.dir.split("/").length + 1 : 1;
 		const prefix = Array(level).fill("..").join("/");
 		const relativePath = `${prefix}/src${file.dir ? `/${file.dir}` : ""}/${file.name}`;
@@ -17,9 +16,10 @@ console.log(run());
 		const filepath = `./runner${file.dir ? `/${file.dir}` : ""}/${file.filename}`;
 		const runnerPath = path.parse(filepath);
 		await fs.mkdir(runnerPath.dir, { recursive: true });
-		if (await fs.exists(filepath)) {
-			await fs.rm(filepath);
-		}
+		await fs
+			.access(filepath)
+			.then(() => fs.rm(filepath))
+			.catch(() => {});
 		await fs.writeFile(filepath, code);
 	}
 }

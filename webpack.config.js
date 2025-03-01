@@ -16,7 +16,6 @@ function createOptions() {
 				name: parsed.name,
 				dir: path.dirname(file),
 			};
-			console.log(data.dir, data.name);
 			return {
 				entry: `./dist/runner/${data.dir ? `${data.dir}/` : ""}${data.name}.js`,
 				output: {
