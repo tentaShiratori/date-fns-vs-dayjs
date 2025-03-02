@@ -18,6 +18,8 @@ async function createOptions() {
 					.relative(runnerDir, file.parentPath)
 					.replaceAll(path.sep, "/"),
 			};
+			// 特定のディレクトリのみを対象にする場合はここでフィルタリングする
+			if (data.dir !== "allfeature") return;
 			return {
 				entryPoints: [
 					`./dist/runner/${data.dir && `${data.dir}/`}${data.name}.js`,
@@ -27,8 +29,10 @@ async function createOptions() {
 				outfile: `./build/${data.dir && `${data.dir}/`}${data.name}/esbuild.js`,
 				metafile: true,
 			};
-		});
+		})
+		.filter(Boolean);
 }
+// @ts-ignore
 await Promise.all((await createOptions()).map((option) => build(option))).then(
 	async (results) => {
 		for (const result of results) {
@@ -36,7 +40,7 @@ await Promise.all((await createOptions()).map((option) => build(option))).then(
 				console.log("metafile is null");
 				return;
 			}
-			const meta = await analyzeMetafile(result.metafile);
+			const meta = await analyzeMetafile(result.metafile, { color: true });
 			console.log(meta);
 		}
 	},

@@ -8,19 +8,19 @@ summary(() => {
 	// MEMO: μ=マイクロ(10^-6), n=ナノ(10^-9)
 	bench("date", () => {
 		date();
-	}).gc("inner");
+	});
 	bench("dayjs", () => {
 		dayjs();
-	}).gc("inner");
+	});
 	bench("date-fns-format", () => {
 		datefnsFormat();
-	}).gc("inner");
+	});
 	bench("date-fns-intl", () => {
 		datefnsIntl();
-	}).gc("inner");
+	});
 	bench("date-fns-light", () => {
 		datefnsLight();
-	}).gc("inner");
+	});
 });
 
 run();

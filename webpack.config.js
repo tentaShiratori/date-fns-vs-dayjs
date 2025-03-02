@@ -16,10 +16,12 @@ function createOptions() {
 				name: parsed.name,
 				dir: path.dirname(file),
 			};
+			// 特定のディレクトリのみを対象にする場合はここでフィルタリングする
+			// if (data.dir !== "allfeature") return;
 			return {
 				entry: `./dist/runner/${data.dir ? `${data.dir}/` : ""}${data.name}.js`,
 				output: {
-					filename: "webpack.js",
+					filename: "[name].js",
 					path: path.resolve(
 						__dirname,
 						`./build/${data.dir ? `${data.dir}/` : ""}${data.name}`,
@@ -29,12 +31,32 @@ function createOptions() {
 				externals: {
 					"date-fns/constants": "dateFns",
 				},
+				optimization: {
+					splitChunks: {
+						cacheGroups: {
+							commons: {
+								chunks: "initial",
+								minChunks: 2,
+								maxInitialRequests: 5, // The default limit is too small to showcase the effect
+								minSize: 0, // This is example is too small to create commons chunks
+							},
+							vendor: {
+								test: /node_modules/,
+								chunks: "initial",
+								name: "vendor",
+								priority: 10,
+								enforce: true,
+							},
+						},
+					},
+				},
 				plugins: [
 					new BundleAnalyzerPlugin({
 						analyzerMode: "static",
 					}),
 				],
 			};
-		});
+		})
+		.filter(Boolean);
 }
-module.exports = createOptions();
+module.exports = [...createOptions()];
